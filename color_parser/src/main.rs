@@ -2,7 +2,6 @@ use serde::Deserialize;
 use std::env;
 use std::fs;
 use std::path::Path;
-use std::process::Command;
 
 #[derive(Deserialize, Debug)]
 struct ColorScheme {
@@ -81,23 +80,4 @@ fn read_color(path: &Path) -> Result<ColorScheme, &'static str> {
         Ok(scheme) => Ok(scheme),
         Err(_) => Err("Invalid Base16 color scheme!"),
     }
-}
-
-fn set_env(color_scheme: &ColorScheme) {
-    Command::new("export").arg(format!("base00={}", color_scheme.base00));
-    Command::new("export").arg(format!("base01={}", color_scheme.base01));
-    Command::new("export").arg(format!("base02={}", color_scheme.base02));
-    Command::new("export").arg(format!("base03={}", color_scheme.base03));
-    Command::new("export").arg(format!("base04={}", color_scheme.base04));
-    Command::new("export").arg(format!("base05={}", color_scheme.base05));
-    Command::new("export").arg(format!("base06={}", color_scheme.base06));
-    Command::new("export").arg(format!("base07={}", color_scheme.base07));
-    Command::new("export").arg(format!("base08={}", color_scheme.base08));
-    Command::new("export").arg(format!("base09={}", color_scheme.base09));
-    Command::new("export").arg(format!("base0A={}", color_scheme.base0_a));
-    Command::new("export").arg(format!("base0B={}", color_scheme.base0_b));
-    Command::new("export").arg(format!("base0C={}", color_scheme.base0_c));
-    Command::new("export").arg(format!("base0D={}", color_scheme.base0_d));
-    Command::new("export").arg(format!("base0E={}", color_scheme.base0_e));
-    Command::new("export").arg(format!("base0F={}", color_scheme.base0_b));
 }
