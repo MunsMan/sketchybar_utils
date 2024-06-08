@@ -32,7 +32,7 @@ struct ColorScheme {
 
 fn main() -> Result<(), &'static str> {
     if env::args().len() < 2 {
-        return Err("Please provide a path to the color scheme");
+        return Err("Please provide the color key");
     }
     let color = env::args().collect::<Vec<_>>()[1].clone();
     let color_scheme = env::var("COLOR_SCHEME").unwrap();
@@ -47,22 +47,26 @@ fn main() -> Result<(), &'static str> {
 
 fn get_color<'a>(color: &str, color_scheme: &'a ColorScheme) -> Result<&'a str, &'static str> {
     match color.to_lowercase().as_str() {
-        "base00" => Ok(&color_scheme.base00),
-        "base01" => Ok(&color_scheme.base01),
-        "base02" => Ok(&color_scheme.base02),
-        "base03" => Ok(&color_scheme.base03),
-        "base04" => Ok(&color_scheme.base04),
-        "base05" => Ok(&color_scheme.base05),
-        "base06" => Ok(&color_scheme.base06),
-        "base07" => Ok(&color_scheme.base07),
-        "base08" => Ok(&color_scheme.base08),
-        "base09" => Ok(&color_scheme.base09),
-        "base0a" => Ok(&color_scheme.base0_a),
-        "base0b" => Ok(&color_scheme.base0_b),
-        "base0c" => Ok(&color_scheme.base0_c),
-        "base0d" => Ok(&color_scheme.base0_d),
-        "base0e" => Ok(&color_scheme.base0_e),
-        "base0f" => Ok(&color_scheme.base0_f),
+        "base00" | "background" | "bg" => Ok(&color_scheme.base00),
+        "base01" | "lighter_background" | "lighter_bg" => Ok(&color_scheme.base01),
+        "base02" | "selection_background" | "selection_bg" => Ok(&color_scheme.base02),
+        "base03" | "comments" | "Invisibles" | "line_highlighting" => Ok(&color_scheme.base03),
+        "base04" | "dark_foreground" | "dark_fg" | "status_bar" => Ok(&color_scheme.base04),
+        "base05" | "foreground" | "fg" | "caret" | "delimiters" | "operators" => {
+            Ok(&color_scheme.base05)
+        }
+        "base06" | "light_foreground" | "light_fg" => Ok(&color_scheme.base06),
+        "base07" | "light_background" | "light_bg" => Ok(&color_scheme.base07),
+        "base08" | "variables" | "tags" | "links" => Ok(&color_scheme.base08),
+        "base09" | "integers" | "boolean" | "constants" | "url" => Ok(&color_scheme.base09),
+        "base0a" | "class" | "bold" | "search_background" | "search_bg" => {
+            Ok(&color_scheme.base0_a)
+        }
+        "base0b" | "string" | "code" => Ok(&color_scheme.base0_b),
+        "base0c" | "support" | "quotes" | "escape_characters" => Ok(&color_scheme.base0_c),
+        "base0d" | "function" | "method" | "heading" => Ok(&color_scheme.base0_d),
+        "base0e" | "keyword" | "storage" | "italic" => Ok(&color_scheme.base0_e),
+        "base0f" | "deprecated" => Ok(&color_scheme.base0_f),
         _ => Err("Unknown Color"),
     }
 }
