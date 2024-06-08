@@ -1,5 +1,5 @@
 [workspace]
 resolver = "2"
 
-members = ["color_parser"]
+members = ["color_parser", "pomo"]
 
